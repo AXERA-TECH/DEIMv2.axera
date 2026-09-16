@@ -1,0 +1,43 @@
+{
+  "input": "deimv2_s.onnx",
+  "model_type": "ONNX",
+  "npu_mode": "NPU1",
+  "target_hardware": "AX650",
+  "quant": {
+    "input_configs": [
+      {
+        "tensor_name": "images",
+        "calibration_dataset": "quant_data/coco64.tar",
+        "calibration_size": 32,
+        "calibration_mean": [0, 0, 0],
+        "calibration_std": [255, 255, 255]
+      },
+      {
+        "tensor_name": "orig_target_sizes",
+        "calibration_dataset": "quant_data/orig_sizes.tar",
+        "calibration_format": "Numpy",
+        "calibration_size": 32
+      }
+    ],
+    "calibration_method": "MinMax",
+    "precision_analysis_method": "EndToEnd",
+    "precision_analysis": true,
+    "layer_configs": [
+       {
+           "start_tensor_names": ["DEFAULT"],
+           "end_tensor_names": [
+            "DEFAULT"
+           ],
+           "data_type": "U16"
+       },
+       {
+           "op_types": ["GridSample"],
+           "data_type": "S16"
+       }
+     ]
+  },
+  "compiler": {
+    "enable_slice_mode": true,
+    "check": 2
+  }
+}
