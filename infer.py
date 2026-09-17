@@ -30,6 +30,9 @@ COCO80 = [
 
 INPUT_SIZE = 640
 
+MEAN = np.array([123.675, 116.28, 103.53], dtype=np.float32)[:, None, None]
+STD = np.array([58.395, 57.12, 57.375], dtype=np.float32)[:, None, None]
+
 
 def load_font():
     for p in ("DejaVuSans.ttf",
@@ -59,7 +62,10 @@ def draw_box(draw, x1, y1, x2, y2, text, color, font):
 def preprocess(img, size_dtype):
     w, h = img.size
     x = img.resize((INPUT_SIZE, INPUT_SIZE), Image.BILINEAR)
-    x = np.asarray(x, dtype=np.float32)[:, :, :3].transpose(2, 0, 1)[None] / 255.0
+    x = np.asarray(x, dtype=np.float32)[:, :, :3].transpose(2, 0, 1)[None]
+    
+    if BACKEND != "axengine":
+        x = (x - MEAN) / STD
     return np.ascontiguousarray(x), np.array([[w, h]], dtype=size_dtype)
 
 

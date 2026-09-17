@@ -9,8 +9,8 @@
         "tensor_name": "images",
         "calibration_dataset": "quant_data/coco64.tar",
         "calibration_size": 32,
-        "calibration_mean": [0, 0, 0],
-        "calibration_std": [255, 255, 255]
+        "calibration_mean": [123.675, 116.28, 103.53],
+        "calibration_std": [58.395, 57.12, 57.375]
       },
       {
         "tensor_name": "orig_target_sizes",
@@ -38,6 +38,16 @@
   },
   "compiler": {
     "enable_slice_mode": true,
-    "check": 2
-  }
+    "check": 0
+  },
+  "input_processors": [
+    {
+      "tensor_name": "images",
+      "tensor_format": "RGB",
+      "tensor_layout": "NCHW",
+      "src_format": "RGB",
+      "src_layout": "NCHW",
+      "src_dtype": "FP32"
+    }
+  ]
 }
