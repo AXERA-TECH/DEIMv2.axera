@@ -6,8 +6,9 @@
 
 This repo contains the deployment-ready ONNX graph, the Pulsar2 build configuration, calibration data, and a minimal inference script.
 
+|  Models  | Note |
+| ------------- | ---------- | 
 | `deimv2_s.onnx` | (DEIMv2-DINOv3-s, 640x640, with in-graph post-processing). Verified on AX650A: mAP 0.603 on 64 COCO val images vs. 0.599 FP32 baseline, ~155 ms/image (NPU1). |
-
 | `deimv2_x.onnx` | (DEIMv2-DINOv3-x, 640x640, with in-graph post-processing). Verified on AX650A: mAP 0.669 on 64 COCO val images vs. 0.662 FP32 baseline, ~155 ms/image (NPU1). | 
 
 ## Result
